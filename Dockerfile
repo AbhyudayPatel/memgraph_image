@@ -20,14 +20,6 @@ ENV MEMGRAPH_LOG_LEVEL=WARNING
 
 # Override the default command to include:
 # - IPv6 binding (::) for Railway compatibility
-# - Memory limit from environment variable
+# - Memory limit (8GB hardcoded)
 # - Data directory for persistent storage (Railway will mount volume here)
-CMD memgraph \
-    --bolt-address=:: \
-    --memory-limit=${MEMGRAPH_MEMORY_LIMIT_MIB} \
-    --data-directory=/var/lib/memgraph \
-    --storage-properties-on-edges=true \
-    --storage-snapshot-interval-sec=300 \
-    --storage-wal-enabled=true \
-    --storage-snapshot-on-exit=true \
-    --storage-recover-on-startup=true
+CMD ["memgraph", "--bolt-address=::", "--memory-limit=8192", "--data-directory=/var/lib/memgraph", "--storage-properties-on-edges=true", "--storage-snapshot-interval-sec=300", "--storage-wal-enabled=true", "--storage-snapshot-on-exit=true", "--storage-recover-on-startup=true"]
